@@ -1,0 +1,80 @@
+<header class="page-header">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container">
+      <a class="navbar-brand fs-4 fw-bolder" routerLink=""
+        ><i class="fa-solid fa-cart-shopping fa-flip-horizontal text-main"></i>
+        FreshCart</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLinkActive="active"
+              routerLink="/home"
+              >Home</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/products"
+              >Products</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" routerLink="/cart"
+              >Cart</a
+            >
+          </li>
+        </ul>
+        <div
+          class="actions d-flex flex-column flex-md-row align-items-center justify-content-center flex-wrap gap-3"
+        >
+          <div class="social">
+            <i class="fa-brands fa-instagram ms-2 pointer"></i>
+            <i class="fa-brands fa-facebook ms-2 pointer"></i>
+            <i class="fa-brands fa-tiktok ms-2 pointer"></i>
+            <i class="fa-brands fa-twitter ms-2 pointer"></i>
+            <i class="fa-brands fa-linkedin ms-2 pointer"></i>
+            <i class="fa-brands fa-youtube ms-2 pointer"></i>
+          </div>
+          <div class="btns">
+            <button
+              *ngIf="!_AuthService.userIsLogedIn.value"
+              routerLink="/auth/register"
+              class="btn bg-main text-light text-uppercase me-2"
+            >
+              Register
+            </button>
+            <button
+              *ngIf="!_AuthService.userIsLogedIn.value"
+              routerLink="/auth"
+              class="btn bg-main text-light text-uppercase me-2"
+            >
+              login
+            </button>
+            <button
+              (click)="_AuthService.logout()"
+              *ngIf="_AuthService.userIsLogedIn.value"
+              class="btn bg-main text-light text-uppercase"
+            >
+              logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>

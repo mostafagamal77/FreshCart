@@ -1,0 +1,16 @@
+<section class="container mt-5">
+  <input
+    [(ngModel)]="searchTerm"
+    type="text"
+    class="w-75 form-control mx-auto my-5 p-3"
+    placeholder="Search..."
+  />
+  <div class="row row-gap4 g-4">
+    <div
+      *ngFor="let product of products | search : searchTerm"
+      class="col-sm-6 col-md-4 col-lg-3"
+    >
+      <app-product [product]="product"></app-product>
+    </div>
+  </div>
+</section>

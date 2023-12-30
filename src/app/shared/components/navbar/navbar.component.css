@@ -1,0 +1,24 @@
+.actions {
+  .social {
+    & svg {
+      transition: var(--transition);
+      -webkit-transition: var(---transition);
+      -moz-transition: var(---transition);
+      -ms-transition: var(---transition);
+      -o-transition: var(---transition);
+    }
+    & svg:hover {
+      color: var(--main-color);
+    }
+  }
+  .btns {
+    & button:hover {
+      background-color: var(--light-color);
+      color: var(--main-color) !important;
+      border: 1px solid var(--main-color);
+    }
+  }
+}
+.navbar-toggler:focus {
+  box-shadow: none !important;
+}

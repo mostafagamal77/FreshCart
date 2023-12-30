@@ -1,0 +1,28 @@
+<div class="product p-3">
+  <div routerLink="/product/{{ product.id }}">
+    <img
+      class="img-fluid mb-3 pointer"
+      [src]="product.imageCover"
+      alt="product img"
+    />
+    <h6 class="text-main">{{ product.category.name }}</h6>
+    <h3>{{ product.title | sliceText : 2 }}</h3>
+    <p>{{ product.description | sliceText : 6 }}</p>
+    <p>
+      <span *ngIf="!product?.priceAfterDiscount" class="me-2 text-main"
+        >{{ product?.price | number : "1.2-2" }} EGP</span
+      >
+      <span
+        *ngIf="product?.priceAfterDiscount"
+        class="me-2 text-decoration-line-through"
+        >{{ product?.price | number : "1.2-2" }} EGP</span
+      >
+      <span *ngIf="product?.priceAfterDiscount" class="me-2 text-main"
+        >{{ product?.priceAfterDiscount | number : "1.2-2" }} EGP</span
+      >
+    </p>
+  </div>
+  <button (click)="addToCart(product.id)" class="btn main-btn d-block mx-auto">
+    <i class="fa-solid fa-cart-plus"></i> Add To Cart
+  </button>
+</div>
