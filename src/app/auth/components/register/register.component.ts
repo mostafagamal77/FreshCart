@@ -45,7 +45,7 @@ export class RegisterComponent {
         next: (res) => {
           this.registerError = false;
           if (res.message == 'success') {
-            this._Router.navigate(['/login']);
+            this._Router.navigate(['/auth']);
           }
         },
         error: (err) => {
