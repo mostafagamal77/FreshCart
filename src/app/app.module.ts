@@ -23,6 +23,11 @@ import { BestSellerPipe } from './pipes/best-seller.pipe';
 import { AddHeaderInterceptor } from './shared/interceptors/add-header.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
+import { BrandsComponent } from './components/brands/brands.component';
+import { CategoriesComponent } from './components/categories/categories.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { AllordersComponent } from './components/allorders/allorders.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +43,11 @@ import { LoaderInterceptor } from './shared/interceptors/loader.interceptor';
     SliceTextPipe,
     ProductsComponent,
     BestSellerPipe,
+    BrandsComponent,
+    CategoriesComponent,
+    WishlistComponent,
+    CheckoutComponent,
+    AllordersComponent,
   ],
   imports: [
     BrowserModule,

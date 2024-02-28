@@ -1,0 +1,12 @@
+.brands {
+  .card {
+    transition: var(--transition);
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
+    &:hover {
+      box-shadow: 0 0 8px var(--main-color);
+    }
+  }
+}

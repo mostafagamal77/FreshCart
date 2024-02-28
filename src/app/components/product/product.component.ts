@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class ProductComponent {
   constructor(
-    private _ProductsService: ProductsService,
+    private _CartService: CartService,
     private _AuthService: AuthService,
     private _Router: Router
   ) {}
@@ -21,8 +22,10 @@ export class ProductComponent {
 
   addToCart(productId: string) {
     if (this._AuthService.userIsLogedIn.value == true) {
-      this._ProductsService.addToCart(productId).subscribe({
-        next: (res) => {},
+      this._CartService.addToCart(productId).subscribe({
+        next: (res) => {
+          this._CartService.numOfCartItems.next(res.numOfCartItems);
+        },
       });
     } else {
       this._Router.navigate(['/auth']);

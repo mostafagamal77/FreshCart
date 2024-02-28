@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/services/products.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,20 +8,22 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class CartComponent implements OnInit {
   productsCart: any[] = [];
+  cartId: string = ''
   productsCount!: number;
   totalPrice!: number;
   updateTimeOut: any;
 
-  constructor(private _ProductsService: ProductsService) {}
+  constructor(private _CartService: CartService) {}
 
   ngOnInit(): void {
     this.getCartProducts();
   }
 
   getCartProducts() {
-    this._ProductsService.getCartProducts().subscribe({
+    this._CartService.getCartProducts().subscribe({
       next: (res) => {
         this.productsCount = res.numOfCartItems;
+        this.cartId = res.data._id
         this.totalPrice = res.data.totalCartPrice;
         this.productsCart = res.data.products;
       },
@@ -30,12 +32,15 @@ export class CartComponent implements OnInit {
 
   deleteCartProduct(productId: string, event: any) {
     this.deleteFromDom(event);
-    this._ProductsService.deleteCartProduct(productId).subscribe({
+    this._CartService.deleteCartProduct(productId).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.productsCount = res.numOfCartItems;
           this.totalPrice = res.data.totalCartPrice;
           this.productsCart = res.data.products;
+          this._CartService.numOfCartItems.next(
+            this._CartService.numOfCartItems.value - 1
+          );
         }
       },
     });
@@ -48,10 +53,11 @@ export class CartComponent implements OnInit {
     parentElement?.remove();
   }
   clearCart() {
-    this._ProductsService.clearCart().subscribe({
+    this._CartService.clearCart().subscribe({
       next: (res) => {
         if ((res.message = 'success')) {
           this.productsCart = [];
+          this._CartService.numOfCartItems.next(0);
         }
       },
     });
@@ -64,7 +70,7 @@ export class CartComponent implements OnInit {
       if (count === 0) {
         this.deleteCartProduct(productId, even);
       } else {
-        this._ProductsService.updateProductCount(productId, count).subscribe({
+        this._CartService.updateProductCount(productId, count).subscribe({
           next: (res) => {
             this.productsCount = res.numOfCartItems;
             this.totalPrice = res.data.totalCartPrice;

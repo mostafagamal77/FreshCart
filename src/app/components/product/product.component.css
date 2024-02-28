@@ -1,5 +1,6 @@
 .product {
   border-radius: 6px;
+  overflow: hidden;
   transition: var(--transition);
   -webkit-transition: var(--transition);
   -moz-transition: var(--transition);
@@ -13,7 +14,57 @@
     text-decoration: underline;
     cursor: pointer;
   }
+  .heart {
+    width: 30px;
+    height: 30px;
+    top: 8px;
+    left: 8px;
+    opacity: 0;
+    background-color: var(--main-color);
+    border-radius: 50%;
+    transition: var(--transition);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    -webkit-transition: var(--transition);
+    -moz-transition: var(--transition);
+    -ms-transition: var(--transition);
+    -o-transition: var(--transition);
+    & svg {
+      color: #fff;
+      transition: var(--transition);
+      -webkit-transition: var(--transition);
+      -moz-transition: var(--transition);
+      -ms-transition: var(--transition);
+      -o-transition: var(--transition);
+    }
+    &:hover {
+      svg {
+        color: #000;
+      }
+    }
+  }
+  .add-btn {
+    opacity: 1;
+    transform: translateY(180%);
+    -webkit-transform: translateY(180%);
+    -moz-transform: translateY(180%);
+    -ms-transform: translateY(180%);
+    -o-transform: translateY(180%);
+  }
 }
 .product:hover {
   box-shadow: 0 0 5px var(--main-color);
+  .heart {
+    opacity: 1;
+  }
+  .add-btn {
+    opacity: 1;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+  }
 }

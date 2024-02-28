@@ -45,7 +45,14 @@
   </div>
 
   <div class="categories slider mb-5">
-    <h3 class="mb-4 text-uppercase">shop categories</h3>
+    <div class="d-flex align-items-start justify-content-between">
+      <h3 class="mb-4 text-uppercase">shop categories</h3>
+      <a
+        [routerLink]="['/categories']"
+        class="text-main fs-5 text-decoration-none fw-medium"
+        >See All</a
+      >
+    </div>
     <owl-carousel-o [options]="categoriesOptions">
       <ng-container *ngFor="let category of categories">
         <ng-template carouselSlide>

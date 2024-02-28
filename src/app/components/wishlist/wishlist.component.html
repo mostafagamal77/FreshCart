@@ -1,0 +1,17 @@
+<section class="wishlist">
+  <div class="container">
+    <h3 *ngIf="!wishlistProducts.length" class="text-main py-5 text-center">
+      Your Wishlist is Empty
+    </h3>
+    <h3 *ngIf="wishlistProducts.length" class="text-main pt-5 text-center">
+      Your Wishlist
+    </h3>
+    <div class="py-5">
+      <div class="row">
+        <div class="col-md-3" *ngFor="let product of wishlistProducts">
+          <app-product [product]="product"></app-product>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

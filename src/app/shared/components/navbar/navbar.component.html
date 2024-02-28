@@ -29,26 +29,68 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/products"
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              [routerLink]="['/products']"
+              [queryParams]="{ page: 1 }"
               >Products</a
             >
           </li>
+
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" routerLink="/cart"
-              >Cart</a
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              [routerLink]="['/brands']"
+              [queryParams]="{ page: 1 }"
+              >Brands</a
             >
           </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              [routerLink]="['/categories']"
+              routerLinkActive="active"
+              >Categories</a
+            >
+          </li>
+
         </ul>
         <div
           class="actions d-flex flex-column flex-md-row align-items-center justify-content-center flex-wrap gap-3"
         >
-          <div class="social">
+          <!-- <div class="social">
             <i class="fa-brands fa-instagram ms-2 pointer"></i>
             <i class="fa-brands fa-facebook ms-2 pointer"></i>
             <i class="fa-brands fa-tiktok ms-2 pointer"></i>
             <i class="fa-brands fa-twitter ms-2 pointer"></i>
             <i class="fa-brands fa-linkedin ms-2 pointer"></i>
             <i class="fa-brands fa-youtube ms-2 pointer"></i>
+          </div> -->
+
+          <div class="actions">
+            <a
+              class="text-main fs-3  position-relative"
+              *ngIf="_AuthService.userIsLogedIn.value"
+              [routerLink]="['/wishlist']"
+            >
+              <i class="fa-regular fa-heart"></i>
+              <span class="link-badge bg-main position-absolute">{{
+                _WishlistService.numberOfWishlist.value
+              }}</span>
+              <!-- <i class="fa-solid fa-heart"></i> -->
+            </a>
+            <a
+              class="text-main fs-3 mx-3 position-relative"
+              *ngIf="_AuthService.userIsLogedIn.value"
+              [routerLink]="['/cart']"
+            >
+              <i class="fa-solid fa-cart-shopping cart-icon"></i>
+              <span class="link-badge bg-main position-absolute">{{
+                _CartService.numOfCartItems.value
+              }}</span>
+            </a>
           </div>
           <div class="btns">
             <button

@@ -1,37 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductsService } from 'src/app/services/products.service';
+import { BrandsService } from 'src/app/services/brands.service';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css'],
+  selector: 'app-brands',
+  templateUrl: './brands.component.html',
+  styleUrls: ['./brands.component.css'],
 })
-export class ProductsComponent implements OnInit {
-  products: any[] = [];
-  searchTerm: string = '';
-
-  constructor(
-    private _ProductsService: ProductsService,
-    private _Router: Router
-  ) {}
-
+export class BrandsComponent implements OnInit {
+  brands: any[] = [];
   numberOfPages: number = 0;
   currentPage: number = 0;
   nextPageNum: number = 0;
   prevPageNum: number = 0;
 
+  constructor(private _BrandsService: BrandsService, private _Router: Router) {}
+
   ngOnInit(): void {
-    this.getAllProducts(1);
+    this.getAllBrands(1);
   }
 
-  getAllProducts(pageNumber: number) {
-    this._ProductsService.getAllProducts(pageNumber).subscribe({
+  getAllBrands(pageNumber: number) {
+    this._BrandsService.getAllBrands(pageNumber).subscribe({
       next: (res) => {
-        this.products = res.data;
+        this.brands = res.data;
         this.numberOfPages = res.metadata.numberOfPages;
         this.currentPage = res.metadata.currentPage;
-        this._Router.navigate(['/products'], {
+        this._Router.navigate(['/brands'], {
           queryParams: { page: pageNumber },
         });
       },
@@ -41,14 +36,14 @@ export class ProductsComponent implements OnInit {
   nextPage() {
     if (this.currentPage < this.numberOfPages) {
       this.currentPage++;
-      this.getAllProducts(this.currentPage);
+      this.getAllBrands(this.currentPage);
     }
   }
 
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
-      this.getAllProducts(this.currentPage);
+      this.getAllBrands(this.currentPage);
     }
   }
 

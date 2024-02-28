@@ -1,14 +1,15 @@
 import { OwlOptions } from 'ngx-owl-carousel-o';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from 'src/app/services/products.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css'],
 })
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit {
   productId: string = '';
   productDetails: any;
   images: string[] = [];
@@ -30,14 +31,18 @@ export class ProductDetailsComponent {
   };
   constructor(
     private _ActivatedRoute: ActivatedRoute,
-    private _ProductsService: ProductsService
-  ) {
-    _ActivatedRoute.params.subscribe((params) => {
+    private _ProductsService: ProductsService,
+    private _CartService: CartService
+  ) {}
+  ngOnInit(): void {
+    this._ActivatedRoute.params.subscribe((params) => {
       this.productId = params['id'];
     });
 
-    _ProductsService.getOneProduct(this.productId).subscribe({
+    this._ProductsService.getOneProduct(this.productId).subscribe({
       next: (res) => {
+        console.log(res);
+
         this.productDetails = res.data;
         this.images = res.data.images;
       },
@@ -45,8 +50,11 @@ export class ProductDetailsComponent {
   }
 
   addToCart(productId: string) {
-    this._ProductsService.addToCart(productId).subscribe({
-      next: (res) => {},
+    this._CartService.addToCart(productId).subscribe({
+      next: (res) => {
+        res;
+        this._CartService.numOfCartItems.next(res.numOfCartItems);
+      },
     });
   }
 }

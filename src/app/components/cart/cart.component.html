@@ -23,68 +23,79 @@
     </p>
   </div>
 
-  <div *ngFor="let product of productsCart" class="row shadow-sm p-3 mb-4">
-    <div class="col-md-1">
-      <img
-        class="img-fluid"
-        [src]="product.product.imageCover"
-        alt="product image"
-      />
-    </div>
-    <div class="col-md-11">
-      <div class="d-flex justify-content-between align-items-center">
-        <div>
-          <h3>{{ product.product.title }}</h3>
-          <p>
-            <span *ngIf="!product?.priceAfterDiscount" class="me-2 text-main"
-              >{{ product?.price | number : "1.2-2" }} EGP</span
+  <div *ngIf="productsCart.length">
+
+    <div *ngFor="let product of productsCart" class="row shadow-sm p-3 mb-4">
+      <div class="col-md-1">
+        <img
+          class="img-fluid"
+          [src]="product.product.imageCover"
+          alt="product image"
+        />
+      </div>
+      <div class="col-md-11">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <h3>{{ product.product.title }}</h3>
+            <p>
+              <span *ngIf="!product?.priceAfterDiscount" class="me-2 text-main"
+                >{{ product?.price | number : "1.2-2" }} EGP</span
+              >
+              <span
+                *ngIf="product?.priceAfterDiscount"
+                class="me-2 text-decoration-line-through"
+                >{{ product?.price | number : "1.2-2" }} EGP</span
+              >
+              <span *ngIf="product?.priceAfterDiscount" class="me-2 text-main"
+                >{{ product?.priceAfterDiscount | number : "1.2-2" }} EGP</span
+              >
+            </p>
+            <button
+              (click)="deleteCartProduct(product.product._id, $event)"
+              class="btn text-danger"
             >
-            <span
-              *ngIf="product?.priceAfterDiscount"
-              class="me-2 text-decoration-line-through"
-              >{{ product?.price | number : "1.2-2" }} EGP</span
+              Remove
+            </button>
+          </div>
+          <div class="d-flex flex-column flex-md-row align-items-center">
+            <button
+              [disabled]="product.count >= product.product.quantity"
+              (click)="
+                updateProductCount(
+                  product.product._id,
+                  product.count + 1,
+                  $event
+                );
+                product.count = product.count + 1
+              "
+              class="btn btn-outline-success"
             >
-            <span *ngIf="product?.priceAfterDiscount" class="me-2 text-main"
-              >{{ product?.priceAfterDiscount | number : "1.2-2" }} EGP</span
+              +
+            </button>
+            <span class="mx-3">{{ product.count }}</span>
+            <button
+              [disabled]="product.count == 1"
+              (click)="
+                updateProductCount(
+                  product.product._id,
+                  product.count - 1,
+                  $event
+                );
+                product.count = product.count - 1
+              "
+              class="btn btn-outline-danger"
             >
-          </p>
-          <button
-            (click)="deleteCartProduct(product.product._id, $event)"
-            class="btn text-danger"
-          >
-            Remove
-          </button>
-        </div>
-        <div class="d-flex flex-column flex-md-row align-items-center">
-          <button
-            (click)="
-              updateProductCount(
-                product.product._id,
-                product.count + 1,
-                $event
-              );
-              product.count = product.count + 1
-            "
-            class="btn btn-outline-success"
-          >
-            +
-          </button>
-          <span class="mx-3">{{ product.count }}</span>
-          <button
-            (click)="
-              updateProductCount(
-                product.product._id,
-                product.count - 1,
-                $event
-              );
-              product.count = product.count - 1
-            "
-            class="btn btn-outline-danger"
-          >
-            -
-          </button>
+              -
+            </button>
+          </div>
         </div>
       </div>
     </div>
+
+
+
+    <button [routerLink]="['/checkout', cartId]" class="pay btn main-btn mt-4" type="submit">
+      checkout
+    </button>
   </div>
 </section>

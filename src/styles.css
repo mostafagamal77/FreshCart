@@ -26,7 +26,7 @@ body {
   background-color: var(--main-color);
 }
 section {
-  min-height: calc(100vh - 360px);
+  min-height: calc(100vh - 310px);
 }
 .text-main {
   color: var(--main-color) !important;
@@ -108,4 +108,19 @@ section {
 .slider .owl-next:hover,
 .slider .owl-prev:hover {
   background-color: rgba(56, 134, 190, 0.8) !important;
+}
+.fs-10 {
+  font-size: 10px !important;
+}
+.fs-11 {
+  font-size: 11px !important;
+}
+.fs-12 {
+  font-size: 12px !important;
+}
+.fs-13 {
+  font-size: 13px !important;
+}
+.fs-14 {
+  font-size: 14px !important;
 }

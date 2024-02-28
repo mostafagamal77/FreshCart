@@ -1,0 +1,36 @@
+<section class="checkout py-5 w-50 mx-auto">
+  <div class="container">
+    <form [formGroup]="checkoutForm">
+      <label>Details:</label>
+      <input
+        type="text"
+        placeholder="Details..."
+        class="form-control mt-2 mb-2"
+        formControlName="details"
+      />
+      <label>Phone:</label>
+      <input
+        type="tel"
+        placeholder="Phone..."
+        class="form-control mt-2 mb-2"
+        formControlName="phone"
+      />
+      <label>City:</label>
+      <input
+        type="text"
+        placeholder="City..."
+        class="form-control mt-2 mb-2"
+        formControlName="city"
+      />
+
+      <div class="actions d-flex justify-content-end mt-4">
+        <button (click)="cashPay()" class="cash btn btn-success">
+          Pay Cash
+        </button>
+        <button (click)="onlinePay()" class="online btn main-btn mx-3">
+          Online Payment <i class="fa-brands fa-cc-visa"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>

@@ -57,7 +57,7 @@ export class HomeComponent implements OnInit {
         items: 6,
       },
     },
-    nav: true,
+    nav: false,
   };
   bestSellerOptions: OwlOptions = {
     loop: true,
@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this._ProductsService.getAllProducts().subscribe({
+    this._ProductsService.getAllProducts(1).subscribe({
       next: (res) => {
         this.products = res.data;
       },

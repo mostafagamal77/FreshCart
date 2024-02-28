@@ -1,28 +1,30 @@
-<div class="product p-3">
+<div class="product p-3 position-relative">
+  <div
+    class="position-absolute heart d-flex align-items-center justify-content-center pointer"
+  >
+    <i class="fa-solid fa-heart"></i>
+  </div>
   <div routerLink="/product/{{ product.id }}">
     <img
       class="img-fluid mb-3 pointer"
       [src]="product.imageCover"
       alt="product img"
     />
-    <h6 class="text-main">{{ product.category.name }}</h6>
-    <h3>{{ product.title | sliceText : 2 }}</h3>
-    <p>{{ product.description | sliceText : 6 }}</p>
-    <p>
-      <span *ngIf="!product?.priceAfterDiscount" class="me-2 text-main"
-        >{{ product?.price | number : "1.2-2" }} EGP</span
-      >
-      <span
-        *ngIf="product?.priceAfterDiscount"
-        class="me-2 text-decoration-line-through"
-        >{{ product?.price | number : "1.2-2" }} EGP</span
-      >
-      <span *ngIf="product?.priceAfterDiscount" class="me-2 text-main"
-        >{{ product?.priceAfterDiscount | number : "1.2-2" }} EGP</span
-      >
-    </p>
+    <h6 class="text-main fs-13">{{ product.category.name }}</h6>
+    <h4 class="fs-6">{{ product.title | sliceText : 2 }}</h4>
+    <div class="d-flex justify-content-between">
+      <p>
+        <span class="me-2 text-main fs-13"
+          >{{ product?.price | number : "1.2-2" }} EGP</span
+        >
+      </p>
+      <div class="rating">
+        <i class="fa-solid fa-star text-warning"></i>
+        {{ product.ratingsAverage }}
+      </div>
+    </div>
   </div>
-  <button (click)="addToCart(product.id)" class="btn main-btn d-block mx-auto">
-    <i class="fa-solid fa-cart-plus"></i> Add To Cart
+  <button (click)="addToCart(product.id)" class="btn main-btn w-100 add-btn">
+    <i class="fa-solid fa-cart-plus"></i> Add
   </button>
 </div>
