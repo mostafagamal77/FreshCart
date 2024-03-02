@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
-  constructor(private spinner: NgxSpinnerService) {}
+  constructor(private spinner: NgxSpinnerService) { }
 
   intercept(
     request: HttpRequest<unknown>,
@@ -28,6 +28,10 @@ export class LoaderInterceptor implements HttpInterceptor {
     if (request.url.includes('cart') && request.method == 'POST') {
       this.spinner.hide();
     }
+    if (request.url.includes('wishlist') && request.method == 'POST') {
+      this.spinner.hide();
+    }
+
     return next.handle(request).pipe(
       finalize(() => {
         this.spinner.hide();

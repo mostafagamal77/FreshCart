@@ -1,5 +1,6 @@
 {
   "cSpell.words": [
+    "allorders",
     "btns",
     "devkit",
     "fontawesome",
@@ -9,6 +10,7 @@
     "Registerform",
     "Signin",
     "signout",
-    "swiper"
+    "swiper",
+    "toastr"
   ]
 }

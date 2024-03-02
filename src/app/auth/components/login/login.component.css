@@ -1,0 +1,10 @@
+@media (min-width: 600px) {
+  .login-form {
+    width: 450px;
+  }
+}
+@media (max-width: 600px) {
+  .login {
+    padding-inline: 20px;
+  }
+}

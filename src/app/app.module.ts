@@ -27,7 +27,7 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { AllordersComponent } from './components/allorders/allorders.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import { AllordersComponent } from './components/allorders/allorders.component';
     CategoriesComponent,
     WishlistComponent,
     CheckoutComponent,
-    AllordersComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +57,7 @@ import { AllordersComponent } from './components/allorders/allorders.component';
     RouterModule,
     BrowserAnimationsModule,
     CarouselModule,
+    ToastrModule.forRoot(),
     NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),
   ],
   providers: [
@@ -75,4 +75,4 @@ import { AllordersComponent } from './components/allorders/allorders.component';
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule { }

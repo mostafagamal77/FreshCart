@@ -3,27 +3,18 @@
     <form [formGroup]="checkoutForm">
       <label>Details:</label>
       <input
-        type="text"
-        placeholder="Details..."
-        class="form-control mt-2 mb-2"
-        formControlName="details"
-      />
+        [ngClass]=" checkoutForm.get('details')?.touched && checkoutForm.get('details')?.getError('required') ? 'error' : ''"
+        type="text" placeholder="Details..." class="form-control mt-2 mb-2" formControlName="details" />
       <label>Phone:</label>
       <input
-        type="tel"
-        placeholder="Phone..."
-        class="form-control mt-2 mb-2"
-        formControlName="phone"
-      />
+        [ngClass]="checkoutForm.get('phone')?.touched && checkoutForm.get('phone')?.getError('required') ? 'error' : ''"
+        type="tel" placeholder="Phone..." class="form-control mt-2 mb-2" formControlName="phone" />
       <label>City:</label>
       <input
-        type="text"
-        placeholder="City..."
-        class="form-control mt-2 mb-2"
-        formControlName="city"
-      />
+        [ngClass]="checkoutForm.get('city')?.touched && checkoutForm.get('city')?.getError('required') ? 'error' : ''"
+        type="text" placeholder="City..." class="form-control mt-2 mb-2" formControlName="city" />
 
-      <div class="actions d-flex justify-content-end mt-4">
+      <div class="actions d-flex justify-content-end flex-column flex-md-row row-gap-3 mt-4">
         <button (click)="cashPay()" class="cash btn btn-success">
           Pay Cash
         </button>

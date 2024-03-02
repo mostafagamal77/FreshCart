@@ -1,76 +1,51 @@
 <section class="login">
   <div class="container my-5">
-    <form [formGroup]="loginForm" (ngSubmit)="signin()">
+    <form class="login-form mx-auto shadow-sm p-3 rounded-3" [formGroup]="loginForm" (ngSubmit)="signin()">
       <div *ngIf="loginError" class="alert alert-danger text-center fw-medium">
         <p class="mb-0">Incorrect Email Or Password</p>
       </div>
       <div>
-        <label>Email:</label>
-        <input
-          type="email"
-          placeholder="Email..."
-          class="form-control mt-2 mb-2"
-          formControlName="email"
-        />
-        <div
-          *ngIf="
+        <label for="loginEmail">Email:</label>
+        <input [ngClass]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched ? 'error': ''" type="email"
+          id="loginEmail" placeholder="Email..."
+          class="form-control mt-2 mb-2 border-0 border-bottom rounded-0 px-1 py-2" formControlName="email" />
+        <div *ngIf="
             loginForm.get('email')?.invalid && loginForm.get('email')?.touched
-          "
-          class="alert alert-danger mb-3 p-2 fw-medium"
-        >
-          <p
-            *ngIf="loginForm.get('email')?.getError('required')"
-            class="mb-0 text-capitalize"
-          >
-            Email is required
+          " class="text-danger mb-3">
+          <p *ngIf="loginForm.get('email')?.getError('required')" class="mb-0">
+            required
           </p>
-          <p
-            *ngIf="loginForm.get('email')?.getError('pattern')"
-            class="mb-0 text-capitalize"
-          >
+          <p *ngIf="loginForm.get('email')?.getError('pattern')" class="mb-0">
             Enter Valid Email
           </p>
         </div>
       </div>
       <div>
-        <label>Password</label>
-        <input
-          type="password"
-          placeholder="Password..."
-          class="form-control mt-2 mb-2"
-          formControlName="password"
-        />
-        <div
-          *ngIf="
+        <label for="loginPass">Password</label>
+        <input [ngClass]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched ? 'error' : ''"
+          type="password" id="loginPass" placeholder="Password..."
+          class="form-control mt-2 mb-2 border-0 border-bottom rounded-0 px-1 py-2" formControlName="password" />
+        <div *ngIf="
             loginForm.get('password')?.invalid &&
             loginForm.get('password')?.touched
-          "
-          class="alert alert-danger mb-3 p-2 fw-medium"
-        >
-          <p
-            *ngIf="loginForm.get('password')?.getError('required')"
-            class="mb-0 text-capitalize"
-          >
-            Password is required
+          " class="text-danger mb-3">
+          <p *ngIf="loginForm.get('password')?.getError('required')" class="mb-0 ">
+            required
           </p>
         </div>
       </div>
 
-      <div class="d-flex align-items-center gap-3 mt-3">
-        <button
-          class="btn main-btn"
-          type="submit"
-          [disabled]="!loginForm.valid"
-        >
-          Login
-        </button>
-        <div class="text-capitalize">
-          don't have an email?
-          <span routerLink="/auth/register" class="text-main pointer"
-            >Register</span
-          >
-        </div>
+      <button class="btn main-btn w-100 mt-2 py-3" type="submit" [disabled]="!loginForm.valid">
+        Login
+      </button>
+      <div [routerLink]="['/auth/forgetPassword']" class="text-capitalize text-center text-main pointer my-3">
+        forget your password ?
       </div>
+      <div class="text-capitalize text-center mb-3">
+        don't have an email?
+        <span routerLink="/auth/register" class="text-main pointer">Register</span>
+      </div>
+
     </form>
   </div>
 </section>

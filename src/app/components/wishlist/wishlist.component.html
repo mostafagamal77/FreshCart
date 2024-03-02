@@ -7,9 +7,25 @@
       Your Wishlist
     </h3>
     <div class="py-5">
-      <div class="row">
-        <div class="col-md-3" *ngFor="let product of wishlistProducts">
-          <app-product [product]="product"></app-product>
+      <div class="row p-3 align-items-center shadow-sm rounded-3 mb-3" *ngFor="let product of wishlistProducts">
+        <div class="col-md-1">
+          <img class="w-100" [src]="product.imageCover" alt="product image" />
+        </div>
+        <div class="col-md-11">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="text">
+              <h4>{{ product.title | sliceText : 2 }}</h4>
+              <p>
+                <span class="me-2 text-main ">{{ product?.price | number : "1.2-2" }} EGP</span>
+              </p>
+              <button (click)="removeFromWishlist(product.id, $event)" class="remove btn p-0 border-0 text-danger">
+                <i class="fa fa-trash"></i> Remove
+              </button>
+            </div>
+            <button class="btn main-btn" (click)="addToCart(product.id)">
+              <i class="fa-solid fa-cart-plus"></i> Add to cart
+            </button>
+          </div>
         </div>
       </div>
     </div>

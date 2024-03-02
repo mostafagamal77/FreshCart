@@ -12,6 +12,7 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthService {
   userIsLogedIn = new BehaviorSubject(false);
+  baseUrl = environment.baseUrl
 
   constructor(private _HttpClient: HttpClient, private _Router: Router) {
     if (localStorage.getItem('token') !== null) {
@@ -28,13 +29,13 @@ export class AuthService {
 
   handleSignUp(registerForm: Registerform): Observable<any> {
     return this._HttpClient.post(
-      'https://ecommerce.routemisr.com/api/v1/auth/signup',
+      `${this.baseUrl}auth/signup`,
       registerForm
     );
   }
   handleSignIn(loginForm: Loginform): Observable<any> {
     return this._HttpClient.post(
-      'https://ecommerce.routemisr.com/api/v1/auth/signin',
+      `${this.baseUrl}auth/signin`,
       loginForm
     );
   }
@@ -43,5 +44,16 @@ export class AuthService {
     this.userIsLogedIn.next(false);
     localStorage.removeItem('token');
     this._Router.navigate(['/home']);
+  }
+
+  forgetPassword(email: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseUrl}auth/forgotPasswords`, email)
+  }
+  verifyCode(code: any): Observable<any> {
+    return this._HttpClient.post(`${this.baseUrl}auth/verifyResetCode`, code)
+  }
+
+  resetPassword(newData: any): Observable<any> {
+    return this._HttpClient.put(`${this.baseUrl}auth/resetPassword`, newData)
   }
 }

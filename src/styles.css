@@ -4,6 +4,7 @@
 
 :root {
   --main-color: #3887be;
+  --hover-color: #092437;
   --light-color: #f0f3f2;
   --font-family: "Encode Sans Expanded", sans-serif;
   --transition: 0.3s;
@@ -20,10 +21,16 @@ body {
   width: 13px;
 }
 ::-webkit-scrollbar-track {
-  background-color: rgba(56, 135, 190, 0.2);
+  background-color: rgba(8, 56, 90, 0.988);
 }
 ::-webkit-scrollbar-thumb {
   background-color: var(--main-color);
+}
+input:focus {
+  box-shadow: none !important;
+}
+.error {
+  border-bottom-color: red !important;
 }
 section {
   min-height: calc(100vh - 310px);
@@ -52,11 +59,13 @@ section {
   -ms-transition: var(--transition);
   -o-transition: var(--transition);
 }
-.main-btn:hover {
-  background-color: var(--light-color) !important;
-  color: var(--main-color) !important;
-  border: 1px solid var(--main-color) !important;
+.main-btn:hover,
+.main-btn:focus,
+.main-btn:disabled {
+  background-color: var(--hover-color) !important;
+  color: var(--light-color);
 }
+
 .btn {
   transition: var(--transition);
   -webkit-transition: var(--transition);

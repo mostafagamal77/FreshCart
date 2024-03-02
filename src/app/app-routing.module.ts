@@ -10,7 +10,6 @@ import { BrandsComponent } from './components/brands/brands.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { AllordersComponent } from './components/allorders/allorders.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full', title: 'FreshCart' },
@@ -44,12 +43,6 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'allorders',
-    component: AllordersComponent,
-    title: 'FreshCart | checkout',
-    canActivate: [authGuard],
-  },
-  {
     path: 'wishlist',
     component: WishlistComponent,
     title: 'FreshCart | wishlist',
@@ -76,4 +69,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

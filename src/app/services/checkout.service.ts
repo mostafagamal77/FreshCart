@@ -13,7 +13,13 @@ export class CheckoutService {
 
 
   onlinePay(cartId: string | null, model: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}orders/checkout-session/${cartId}?url=http://localhost:4200`, {
+    return this.http.post(`${this.baseUrl}orders/checkout-session/${cartId}?url=${this.checkUrl}`, {
+      shippingAddress: model
+    })
+  }
+
+  cashPay(cartId: string | null, model: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}orders/${cartId}`, {
       shippingAddress: model
     })
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -13,7 +14,7 @@ export class CartComponent implements OnInit {
   totalPrice!: number;
   updateTimeOut: any;
 
-  constructor(private _CartService: CartService) {}
+  constructor(private _CartService: CartService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getCartProducts();
@@ -27,11 +28,16 @@ export class CartComponent implements OnInit {
         this.totalPrice = res.data.totalCartPrice;
         this.productsCart = res.data.products;
       },
+      error: (err) => console.log(err)
     });
   }
 
   deleteCartProduct(productId: string, event: any) {
     this.deleteFromDom(event);
+    this.toastr.success('Product removed from cart successfully', '', {
+      timeOut: 2000,
+      progressBar: true
+    });
     this._CartService.deleteCartProduct(productId).subscribe({
       next: (res) => {
         if (res.status === 'success') {
@@ -53,6 +59,10 @@ export class CartComponent implements OnInit {
     parentElement?.remove();
   }
   clearCart() {
+    this.toastr.success('Cart cleared successfully', '', {
+      timeOut: 2000,
+      progressBar: true
+    });
     this._CartService.clearCart().subscribe({
       next: (res) => {
         if ((res.message = 'success')) {

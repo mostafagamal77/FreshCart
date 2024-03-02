@@ -4,17 +4,10 @@
       <h2 *ngIf="productsCart.length !== 0">
         Your Cart <span>({{ productsCount }})</span>
       </h2>
-      <button
-        *ngIf="productsCart.length !== 0"
-        (click)="clearCart(); productsCart = []"
-        class="btn btn-outline-danger"
-      >
+      <button *ngIf="productsCart.length !== 0" (click)="clearCart(); productsCart = []" class="btn btn-outline-danger">
         Clear Cart
       </button>
-      <div
-        class="alert alert-info mx-auto fw-medium fs-5"
-        *ngIf="productsCart.length == 0"
-      >
+      <div class="alert alert-info mx-auto fw-medium fs-5" *ngIf="productsCart.length == 0">
         Your Cart Is Empty
       </div>
     </div>
@@ -27,64 +20,44 @@
 
     <div *ngFor="let product of productsCart" class="row shadow-sm p-3 mb-4">
       <div class="col-md-1">
-        <img
-          class="img-fluid"
-          [src]="product.product.imageCover"
-          alt="product image"
-        />
+        <img class="img-fluid" [src]="product.product.imageCover" alt="product image" />
       </div>
-      <div class="col-md-11">
+      <div class="col-md-11 mt-3 mt-md-0">
         <div class="d-flex justify-content-between align-items-center">
           <div>
-            <h3>{{ product.product.title }}</h3>
+            <h3>{{ product.product.title | sliceText:2 }}</h3>
             <p>
-              <span *ngIf="!product?.priceAfterDiscount" class="me-2 text-main"
-                >{{ product?.price | number : "1.2-2" }} EGP</span
-              >
-              <span
-                *ngIf="product?.priceAfterDiscount"
-                class="me-2 text-decoration-line-through"
-                >{{ product?.price | number : "1.2-2" }} EGP</span
-              >
-              <span *ngIf="product?.priceAfterDiscount" class="me-2 text-main"
-                >{{ product?.priceAfterDiscount | number : "1.2-2" }} EGP</span
-              >
+              <span *ngIf="!product?.priceAfterDiscount" class="me-2 text-main">{{ product?.price | number : "1.2-2" }}
+                EGP</span>
+              <span *ngIf="product?.priceAfterDiscount" class="me-2 text-decoration-line-through">{{ product?.price |
+                number : "1.2-2" }} EGP</span>
+              <span *ngIf="product?.priceAfterDiscount" class="me-2 text-main">{{ product?.priceAfterDiscount | number :
+                "1.2-2" }} EGP</span>
             </p>
-            <button
-              (click)="deleteCartProduct(product.product._id, $event)"
-              class="btn text-danger"
-            >
-              Remove
+            <button (click)="deleteCartProduct(product.product._id, $event)" class="btn text-danger p-0 border-0">
+              <i class="fa fa-trash"></i> Remove
             </button>
           </div>
           <div class="d-flex flex-column flex-md-row align-items-center">
-            <button
-              [disabled]="product.count >= product.product.quantity"
-              (click)="
+            <button [disabled]="product.count >= product.product.quantity" (click)="
                 updateProductCount(
                   product.product._id,
                   product.count + 1,
                   $event
                 );
                 product.count = product.count + 1
-              "
-              class="btn btn-outline-success"
-            >
+              " class="btn btn-outline-success">
               +
             </button>
-            <span class="mx-3">{{ product.count }}</span>
-            <button
-              [disabled]="product.count == 1"
-              (click)="
+            <span class="mx-3 my-2 my-md-0">{{ product.count }}</span>
+            <button [disabled]="product.count == 1" (click)="
                 updateProductCount(
                   product.product._id,
                   product.count - 1,
                   $event
                 );
                 product.count = product.count - 1
-              "
-              class="btn btn-outline-danger"
-            >
+              " class="btn btn-outline-danger">
               -
             </button>
           </div>
@@ -94,8 +67,8 @@
 
 
 
-    <button [routerLink]="['/checkout', cartId]" class="pay btn main-btn mt-4" type="submit">
-      checkout
+    <button [routerLink]="['/checkout', cartId]" class="pay btn fs-5  main-btn mt-3 d-block ms-auto" type="submit">
+      Checkout <i class="fa-solid fa-money-check-dollar"></i>
     </button>
   </div>
 </section>

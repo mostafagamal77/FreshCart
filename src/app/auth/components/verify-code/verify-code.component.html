@@ -1,0 +1,23 @@
+<section class="py-4">
+  <h3 class="text-center mt-4">
+    Enter Code
+  </h3>
+  <form class="w-50 mx-auto" [formGroup]="codeForm" (ngSubmit)="verifyCode()">
+    <label for="code">Code</label>
+    <input [ngClass]="codeForm.get('resetCode')?.invalid && codeForm.get('resetCode')?.touched ? 'error' : ''"
+      type="text" id="code" placeholder="Code..."
+      class="form-control mt-2 mb-2 border-0 border-bottom rounded-0 px-1 py-2" formControlName="resetCode" />
+    <div *ngIf="
+      codeForm.get('resetCode')?.invalid && codeForm.get('resetCode')?.touched
+    " class="text-danger mb-3">
+      <p *ngIf="codeForm.get('resetCode')?.getError('required')" class="mb-0">
+        required
+      </p>
+
+    </div>
+    <button class="btn main-btn  mt-2" type="submit" [disabled]="codeForm.invalid">
+      Verify
+    </button>
+
+  </form>
+</section>
